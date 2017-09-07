@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<title> Greetings </title>
+<head><title> Greetings </title>
+</head>
 
-
+<body>
     <h1>
         Welcome to my first HTML file in 7 years!
     </h1>
@@ -12,27 +13,52 @@
 
     </p>
 
-    <canvas id = "Canvas like Guilford??" height = "500" width"500">
-    var mycanvas = document.getElementbyID("canvas like Guilford??");
-    var context = canvas.getContext('2d');
+    <canvas id = "guilfordCanvas" height = "300" width = "1000"> </canvas>
+<script>
+    var myCanvas = document.getElementById("guilfordCanvas");
+    var context = myCanvas.getContext('2d');
 
-    var x = 0;
-    var y = 0;
+    var x = 0
+    var y = 0
+    var vx = 7
+    var vy = 10
+    var r = 50
+    var a = .99
+    var now
+    var s
+    
+    function startTime() {
+        now = new Date();
+        s = now.getSeconds();
+        var t = setTimeout(startTime, 500);
+    }
 
     function run() {
-        x = x + 10;
-        y = y + 10;
+        context.clearRect(0, 0, myCanvas.width, myCanvas.height)
+        x = x + vx; //before I put in a physics equation for x, y, vx, and vy but my ball disappeared :/
+        y = x + vy;
+        vx = a*vx;
+        vy = a*vy;
         context.beginPath();
-        context.arc(50 + x, 200 + years, 0, 2*Math.PI);
+        context.arc(x, y, r, 0, 2*Math.PI);
         context.closePath();
         context.fill();
-        requestAnimationFrame(draw);
+        requestAnimationFrame(run);
+
+        if(x >= myCanvas.width - r || x <= -r) {
+            vx = -vx
+        }
+        if(y >= myCanvas.height - r || y <= -r) {
+            vy = -vy
+        }
 
     }
 
 
 run();
 
+</script>
 
+</body>
 
 </html>
